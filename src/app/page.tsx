@@ -3,6 +3,7 @@ import { CountdownTimer } from '@/components/atoms/countdownTimer';
 import { HrIcon } from '@/components/atoms/hrIcon';
 import AboutEvent from '@/components/molecules/aboutEvent';
 import CardHeader from '@/components/molecules/cardHeader';
+import Checkin from '@/components/molecules/checkin';
 import GiftBlock from '@/components/molecules/giftBlock';
 import { EventContent } from '@/shared/types/eventContent';
 import { WishList } from '@/shared/types/wishlist/wishlist';
@@ -30,13 +31,9 @@ export default async function Home() {
       <CountdownTimer limit={event.date} />
     </React.Fragment>,
 
-    <React.Fragment>
-      <AboutEvent event={event} />
-    </React.Fragment>,
-
-    <React.Fragment>
-      <GiftBlock section={wishList} />
-    </React.Fragment>,
+    <AboutEvent event={event} />,
+    <Checkin />,
+    <GiftBlock section={wishList} />,
   ];
 
   return (

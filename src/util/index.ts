@@ -24,7 +24,7 @@ export const addPlural = (value: number, word: string) =>
 
 export function getRemainingTime(
   dateStr: string,
-  alternativeText = 'agora'
+  alternativeText = 'agora',
 ): {
   raw: number;
   d: number;
@@ -64,6 +64,25 @@ export function getRemainingTime(
   else text = `${s} ${addPlural(s, 'segundo')}`;
 
   return { raw: diff, d, h, m, s, text, expired: false };
+}
+
+export function splitDateTime(timestamp: string) {
+  const date = new Date(timestamp);
+
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  const dateStr = `${day}/${month}/${year}`;
+  const timeStr = `${hours}h ${minutes}m`;
+
+  return {
+    date: dateStr,
+    time: timeStr,
+  };
 }
 
 export function imagePathValidation(url?: string | null) {

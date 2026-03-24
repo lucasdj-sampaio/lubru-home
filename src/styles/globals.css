@@ -27,6 +27,7 @@ button {
 
   --color-background: rgb(220, 218, 213);
   --color-sub-background: rgb(238, 235, 231);
+  --color-item-background: rgb(207, 197, 186);
   --color-primary: rgb(47, 69, 111);
   --color-secondary: rgb(197, 162, 73);
   --color-title: rgb(255, 255, 255);
