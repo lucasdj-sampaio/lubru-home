@@ -22,7 +22,7 @@ export default async function Home() {
 
   const sectionClass = 'p-10 flex flex-col gap-8 items-center';
   const content: React.ReactNode[] = [
-    <React.Fragment>
+    <React.Fragment key="countdownTimer">
       <div className="section-title">
         <HrIcon icon={<Clock size={16} />} />
         <h2>Contagem Regressiva</h2>
@@ -31,9 +31,9 @@ export default async function Home() {
       <CountdownTimer limit={event.date} />
     </React.Fragment>,
 
-    <AboutEvent event={event} />,
-    <Checkin />,
-    <GiftBlock section={wishList} />,
+    <AboutEvent key="aboutEvent" event={event} />,
+    <Checkin key="checkin" />,
+    <GiftBlock key="wishList" section={wishList} />,
   ];
 
   return (

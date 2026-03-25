@@ -1,6 +1,8 @@
+import { Iconhub } from '@/shared/interfaces/icon';
+
 export class GiftItem {
   id: number;
-  icon: string;
+  icon: Iconhub;
   name: string;
   description: string;
   active: boolean;
@@ -9,7 +11,7 @@ export class GiftItem {
 
   constructor(
     id: number,
-    icon: string,
+    icon: Iconhub,
     name: string,
     description: string,
     active: boolean,
@@ -28,7 +30,11 @@ export class GiftItem {
   static fromJson(json: any): GiftItem {
     return new GiftItem(
       json.id,
-      json.Icon.iconData,
+      {
+        width: json.Icon.width,
+        height: json.Icon.height,
+        iconData: json.Icon.iconData,
+      },
       json.Name,
       json.Description,
       json.Active,

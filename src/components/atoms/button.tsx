@@ -16,7 +16,7 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
 }: ButtonProps) => {
   const styles = clsx(
-    'flex items-center gap-2 no-select px-8 py-2',
+    'flex items-center justify-center gap-2 no-select px-8 py-2',
     'border-2 text-secondary font-light',
     'hover:bg-secondary hover:text-primary hover:[&>svg]:text-primary hover:border-secondary',
     'transition-all duration-300 [&>svg]:transition-all [&>svg]:duration-300',

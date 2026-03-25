@@ -1,13 +1,14 @@
+import { Iconhub } from '@/shared/interfaces/icon';
 import { GiftItem } from './giftItem';
 
 export class GiftCategory {
-  icon: string;
+  icon: Iconhub;
   category: string;
   gifts: GiftItem[];
   isOpen?: boolean;
 
   constructor(
-    icon: string,
+    icon: Iconhub,
     category: string,
     gifts: GiftItem[],
     isOpen = false,
@@ -19,7 +20,11 @@ export class GiftCategory {
   }
 
   static fromJson(json: any): GiftCategory {
-    const icon = json.Icon.iconData;
+    const icon = {
+      width: json.Icon.width,
+      height: json.Icon.height,
+      iconData: json.Icon.iconData,
+    };
     const category = json.Category;
     const gifts = (json.Gift || []).map((g: any) => GiftItem.fromJson(g));
 

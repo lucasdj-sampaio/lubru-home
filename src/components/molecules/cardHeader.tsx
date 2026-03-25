@@ -6,7 +6,7 @@ import { Button } from '../atoms/button';
 import { Header } from '../atoms/header';
 import { HrIcon } from '../atoms/hrIcon';
 
-export default async function CardHeader() {
+export default function CardHeader() {
   const hr = <hr className="section-hr" />;
   const baseTitleClass =
     'font-secondary font-normal text-4xl md:text-6xl font-bold';
