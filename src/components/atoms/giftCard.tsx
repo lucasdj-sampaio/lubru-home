@@ -1,54 +1,50 @@
-import { GiftItem } from '@/shared/types/wishlist/giftItem';
+import { GiftItemDTO } from '@/shared/types/dtos/giftItem';
+import { formatBRL, truncateText } from '@/util';
 import clsx from 'clsx';
+import { SvgIcon } from './svgIcon';
 
-interface CardProps {
-  gift: GiftItem;
-  unlocked: boolean;
+interface GiftCardProps {
+  gift: GiftItemDTO;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default function GiftCard({ gift, unlocked }: CardProps) {
-  const isFound = gift.active;
-  const currentClueCondition = !isFound && unlocked;
-
-  const containerClass = clsx(
-    'flex items-center gap-2 hover:cursor-default transition-all',
-    unlocked
-      ? `${
-          isFound ? 'bg-primary/1' : 'bg-background'
-        } p-2 md:p-5 border border-primary/30 rounded-lg`
-      : 'bg-transparent px-2 md:px-5 py-1',
-  );
-
-  const iconClass = clsx(
-    'p-1 md:p-2 w-min h-min rounded-full [&>svg]:w-5 [&>svg]:h-5',
-    isFound ? 'bg-primary/10' : unlocked ? 'bg-secondary/10' : 'bg-transparent',
-  );
-
-  const titleClass = clsx(
-    'text-sm font-semibold',
-    unlocked ? 'text-secondary' : 'text-opaque',
-  );
-
-  const descriptionClass = clsx(
-    'text-xs',
-    unlocked ? 'text-[rgba(115,115,115,1)]' : 'text-opaque',
-  );
+export default function GiftCard({ gift, onClick }: GiftCardProps) {
+  const { id, icon, name, description, value } = gift;
 
   return (
-    <div id={gift.id.toString()} className={containerClass}>
-      <div className={iconClass}></div>
-
-      <div>
-        <h5 className={titleClass}>{gift.name}</h5>
-
-        <p className={descriptionClass}>
-          <strong className="font-medium">
-            {isFound ? gift.name : unlocked ? 'Dica: ' : 'Bloqueado'}
-          </strong>
-
-          {currentClueCondition && gift.description}
-        </p>
+    <button
+      id={id.toString()}
+      onClick={onClick}
+      className={clsx(
+        'group max-w-80 rounded-lg border border-opaque/50 bg-item-background/60 p-8 text-center',
+        'cursor-pointer transition-all duration-300',
+        'hover:border-secondary/50 hover:shadow-lg',
+      )}
+    >
+      <div
+        className={clsx(
+          'mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full',
+          'bg-primary/10 transition-colors duration-300',
+          'group-hover:bg-secondary/20',
+        )}
+      >
+        <SvgIcon icon={icon} className="text-secondary" />
       </div>
-    </div>
+
+      <h3 className="mb-2 font-secondary text-lg text-primary">{name}</h3>
+
+      <p className="mb-3 text-sm text-regular text-muted-foreground">
+        {truncateText(description)}
+      </p>
+
+      <span
+        className={clsx(
+          'inline-block rounded-full border px-3 py-1 text-xs font-semibold tracking-wide',
+          'border-secondary/20 bg-secondary/10 text-secondary',
+        )}
+      >
+        {formatBRL(value)}
+      </span>
+    </button>
   );
 }

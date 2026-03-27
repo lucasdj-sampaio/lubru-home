@@ -1,4 +1,5 @@
 import { Iconhub } from '@/shared/interfaces/icon';
+import { GiftCategoryDTO } from '../dtos/giftCategory';
 import { GiftItem } from './giftItem';
 
 export class GiftCategory {
@@ -29,5 +30,14 @@ export class GiftCategory {
     const gifts = (json.Gift || []).map((g: any) => GiftItem.fromJson(g));
 
     return new GiftCategory(icon, category, gifts);
+  }
+
+  toJson(): GiftCategoryDTO {
+    return {
+      icon: this.icon,
+      category: this.category,
+      gifts: this.gifts.map(a => a.toJson()),
+      isOpen: this.isOpen,
+    };
   }
 }

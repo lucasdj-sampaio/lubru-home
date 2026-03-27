@@ -1,12 +1,13 @@
 import { fetchStrapi } from '@/app/api/strapi';
 import { CountdownTimer } from '@/components/atoms/countdownTimer';
 import { HrIcon } from '@/components/atoms/hrIcon';
-import AboutEvent from '@/components/molecules/aboutEvent';
-import CardHeader from '@/components/molecules/cardHeader';
-import Checkin from '@/components/molecules/checkin';
-import GiftBlock from '@/components/molecules/giftBlock';
+import AboutEvent from '@/components/content/aboutEvent';
+import CardHeader from '@/components/content/cardHeader';
+import Checkin from '@/components/content/checkin';
+import Footer from '@/components/content/footer';
+import WishlistContent from '@/components/content/wishlist';
 import { EventContent } from '@/shared/types/eventContent';
-import { WishList } from '@/shared/types/wishlist/wishlist';
+import { Wishlist } from '@/shared/types/wishlist/wishlist';
 import clsx from 'clsx';
 import { Clock } from 'lucide-react';
 import React from 'react';
@@ -15,10 +16,13 @@ export default async function Home() {
   const json = await fetchStrapi('event');
   const event = EventContent.fromJson(json);
 
-  const jsonGifts = await fetchStrapi('gifts?populate[Gift][populate]=*', {
-    revalidate: 7200,
-  });
-  const wishList = WishList.fromJson(jsonGifts);
+  const jsonGifts = await fetchStrapi(
+    'gifts?populate[Gift][populate]=*&sort=id:asc',
+    {
+      revalidate: 7200,
+    },
+  );
+  const wishlist = Wishlist.fromJson(jsonGifts);
 
   const sectionClass = 'p-10 flex flex-col gap-8 items-center';
   const content: React.ReactNode[] = [
@@ -33,7 +37,7 @@ export default async function Home() {
 
     <AboutEvent key="aboutEvent" event={event} />,
     <Checkin key="checkin" />,
-    <GiftBlock key="wishList" section={wishList} />,
+    <WishlistContent key="wishlist" section={wishlist} />,
   ];
 
   return (
@@ -55,6 +59,8 @@ export default async function Home() {
           </section>
         );
       })}
+
+      <Footer />
     </div>
   );
 }

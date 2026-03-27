@@ -1,4 +1,5 @@
 import { Iconhub } from '@/shared/interfaces/icon';
+import { GiftItemDTO } from '../dtos/giftItem';
 
 export class GiftItem {
   id: number;
@@ -41,5 +42,17 @@ export class GiftItem {
       json.BuyUrl,
       json.Value,
     );
+  }
+
+  toJson(): GiftItemDTO {
+    return {
+      id: this.id,
+      name: this.name,
+      icon: this.icon,
+      description: this.description,
+      active: this.active,
+      buyUrl: this.buyUrl,
+      value: this.value,
+    };
   }
 }

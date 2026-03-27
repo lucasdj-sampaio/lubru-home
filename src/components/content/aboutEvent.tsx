@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { EventCard } from '../atoms/eventCard';
 import { HrIcon } from '../atoms/hrIcon';
-import { ItemCardList } from './itemCardList';
+import { ItemCardList } from '../molecules/itemCardList';
 
 export default async function AboutEvent({ event }: { event: EventContent }) {
   const json = await fetchStrapi('joke?populate[Activitie][populate]=*');

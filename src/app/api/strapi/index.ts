@@ -18,7 +18,6 @@ export async function fetchStrapi<T = any>(
     headers: {
       'Content-Type': 'application/json',
       ...opts?.headers,
-      
     },
     cache: opts?.noStore ? 'no-store' : undefined,
     next: opts?.revalidate ? { revalidate: opts.revalidate } : undefined,

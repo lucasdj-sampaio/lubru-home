@@ -6,6 +6,8 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   href?: string;
   children?: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -13,6 +15,8 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
   href,
   children,
+  className,
+  disabled,
   onClick,
 }: ButtonProps) => {
   const styles = clsx(
@@ -20,6 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
     'border-2 text-secondary font-light',
     'hover:bg-secondary hover:text-primary hover:[&>svg]:text-primary hover:border-secondary',
     'transition-all duration-300 [&>svg]:transition-all [&>svg]:duration-300',
+    className,
   );
 
   if (href) {
@@ -30,7 +35,12 @@ export const Button: React.FC<ButtonProps> = ({
     );
   }
   return (
-    <button type={type} className={styles} onClick={onClick}>
+    <button
+      type={type}
+      className={styles}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

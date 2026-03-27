@@ -1,6 +1,7 @@
+import { WishlistDTO } from '../dtos/wishlist';
 import { GiftCategory } from './giftCategory';
 
-export class WishList {
+export class Wishlist {
   categories: GiftCategory[];
 
   constructor(categorys: GiftCategory[]) {
@@ -13,9 +14,15 @@ export class WishList {
     });
   }
 
-  static fromJson(json: any): WishList {
+  static fromJson(json: any): Wishlist {
     const gifts = (json.data || []).map((g: any) => GiftCategory.fromJson(g));
 
-    return new WishList(gifts);
+    return new Wishlist(gifts);
+  }
+
+  toJson(): WishlistDTO {
+    return {
+      categories: this.categories.map(a => a.toJson()),
+    };
   }
 }

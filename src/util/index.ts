@@ -1,24 +1,3 @@
-export function scrambleText(text?: string | null): string {
-  if (!text) return '';
-
-  return text
-    .split(' ')
-    .map(word => {
-      if (word.length <= 2) return word;
-
-      const first = word[0];
-      const rest = word.slice(1);
-
-      const scrambled = rest
-        .split('')
-        .sort(() => Math.random() - 0.5)
-        .join('');
-
-      return first + scrambled;
-    })
-    .join(' ');
-}
-
 export const addPlural = (value: number, word: string) =>
   `${word}${value === 1 ? '' : 's'}`;
 
@@ -85,10 +64,15 @@ export function splitDateTime(timestamp: string) {
   };
 }
 
-export function imagePathValidation(url?: string | null) {
-  if (!url) return '';
+export function truncateText(text: string, maxLength = 50): string {
+  if (!text) return '';
 
-  if (url.startsWith('http')) return url;
+  return text.length > maxLength ? text.slice(0, maxLength - 3) + '...' : text;
+}
 
-  return `${process.env.STRAPI_BASEURL}${url}`;
+export function formatBRL(value: number): string {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(value);
 }

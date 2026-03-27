@@ -17,12 +17,12 @@ export function ItemCard({
   const isClickable = !!onClick;
 
   const variantClass = clsx(
-    'flex items-center justify-center gap-1 px-4 py-2 rounded-full text-sm border bg-primary/5',
+    'no-select flex items-center justify-center gap-1 px-4 py-2 rounded-full text-sm border',
     {
-      'text-title border-primary cursor-pointer': isActive,
-      'text-opaque hover:border-secondary cursor-pointer':
+      'bg-primary text-title border-primary cursor-pointer': isActive,
+      'bg-item-background/40 text-regular hover:border-secondary cursor-pointer':
         isClickable && !isActive,
-      'text-regular border-regular/20': !isClickable && !isActive,
+      'bg-primary/5 text-regular border-regular/20': !isClickable && !isActive,
     },
   );
 

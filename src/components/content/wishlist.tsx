@@ -1,8 +1,9 @@
-import { WishList } from '@/shared/types/wishlist/wishlist';
+import { Wishlist } from '@/shared/types/wishlist/wishlist';
 import { Luggage } from 'lucide-react';
 import { HrIcon } from '../atoms/hrIcon';
+import { WishlistContainer } from '../molecules/wishlistContainer';
 
-export default function GiftBlock({ section }: { section: WishList }) {
+export default function WishlistContent({ section }: { section: Wishlist }) {
   return (
     <div id="baggage" className="flex flex-col gap-8">
       <div className="section-title">
@@ -18,6 +19,10 @@ export default function GiftBlock({ section }: { section: WishList }) {
         Ajude-nos a montar a bagagem do nosso novo lar! Sua presença é o que
         mais importa, mas aqui vão algumas sugestões.
       </p>
+
+      <div className="flex flex-wrap justify-center gap-2">
+        <WishlistContainer items={section.toJson()} />
+      </div>
     </div>
   );
 }

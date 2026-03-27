@@ -1,10 +1,6 @@
 import clsx from 'clsx';
 
-interface BarProps {
-  progress?: number;
-}
-
-export default function ProgressBar({ progress = 0 }: BarProps) {
+export default function ProgressBar({ progress = 0 }: { progress: number }) {
   const barBaseClass = 'h-1.5 rounded-2xl';
 
   return (
@@ -14,7 +10,7 @@ export default function ProgressBar({ progress = 0 }: BarProps) {
       <div
         className={clsx(
           barBaseClass,
-          'absolute bg-primary transition-all duration-700 ease-out'
+          'absolute bg-primary transition-all duration-700 ease-out',
         )}
         style={{ width: `${progress >= 10 ? progress : 0}%` }}
       />

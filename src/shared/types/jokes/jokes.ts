@@ -1,21 +1,22 @@
-import { Activity } from './activitie';
+import { JokesDTO } from '../dtos/jokes';
+import { Activitie } from './activitie';
 
 export class Jokes {
-  activites: Activity[];
+  activites: Activitie[];
 
-  constructor(activites: Activity[]) {
+  constructor(activites: Activitie[]) {
     this.activites = activites;
   }
 
   static fromJson(json: any): Jokes {
     const activites = (json.data.Activitie || []).map((g: any) =>
-      Activity.fromJson(g),
+      Activitie.fromJson(g),
     );
 
     return new Jokes(activites);
   }
 
-  toJson() {
+  toJson(): JokesDTO {
     return {
       activites: this.activites.map(a => a.toJson()),
     };

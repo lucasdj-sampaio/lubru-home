@@ -1,6 +1,7 @@
 import { Iconhub } from '@/shared/interfaces/icon';
+import { ActivitieDTO } from '../dtos/activitie';
 
-export class Activity {
+export class Activitie {
   icon: Iconhub;
   name: string;
 
@@ -9,8 +10,8 @@ export class Activity {
     this.name = name;
   }
 
-  static fromJson(json: any): Activity {
-    return new Activity(
+  static fromJson(json: any): Activitie {
+    return new Activitie(
       {
         width: json.Icon.width,
         height: json.Icon.height,
@@ -20,7 +21,7 @@ export class Activity {
     );
   }
 
-  toJson() {
+  toJson(): ActivitieDTO {
     return {
       name: this.name,
       icon: this.icon,
