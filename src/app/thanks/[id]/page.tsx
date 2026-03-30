@@ -50,7 +50,7 @@ export default async function ThanksPage({ params: { id } }: Props) {
             Agradecemos de coração pela sua contribuição
             {giftName && (
               <>
-                com <strong className="text-secondary">{giftName}</strong>
+                {' com'} <strong className="text-secondary">{giftName}</strong>
               </>
             )}
             .
