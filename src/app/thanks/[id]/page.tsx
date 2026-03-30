@@ -9,15 +9,17 @@ interface Props {
 export default async function ThanksPage({ params }: Props) {
   const { id } = params;
 
-  const response = await fetchStrapi<GiftResponseDTO>('gifts/deactivate', {
-    method: 'POST',
-    noStore: true,
-    body: JSON.stringify({ id: id }),
-    headers: {
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN ?? ''}`,
-      'Content-Type': 'application/json',
+  const response = await fetchStrapi<GiftResponseDTO>(
+    `gifts/${id}/deactivate`,
+    {
+      method: 'POST',
+      noStore: true,
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN ?? ''}`,
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-primary">
