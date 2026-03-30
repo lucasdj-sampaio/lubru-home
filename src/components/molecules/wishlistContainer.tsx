@@ -2,12 +2,12 @@
 import { GiftItemDTO } from '@/shared/types/dtos/giftItem';
 import { WishlistDTO } from '@/shared/types/dtos/wishlist';
 import { formatBRL } from '@/util';
+import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import { Button } from '../atoms/button';
 import GiftCard from '../atoms/giftCard';
 import { ItemCard } from '../atoms/itemCard';
 import { Modal } from '../atoms/modal';
-import { SvgIcon } from '../atoms/svgIcon';
 
 interface WishlistProps {
   items: WishlistDTO;
@@ -33,7 +33,7 @@ export function WishlistContainer({ items }: WishlistProps) {
         {items.categories.map((room, i) => (
           <ItemCard
             key={`category_${room.category}_${i}`}
-            icon={<SvgIcon icon={room.icon} size={20} />}
+            icon={<Icon icon={room.icon} width={14} height={14} />}
             label={room.category}
             isActive={openCategory === i}
             onClick={() => setOpenCategory(i)}
@@ -59,7 +59,7 @@ export function WishlistContainer({ items }: WishlistProps) {
         <Modal open={!!viewGift} onClose={handleCloseModal}>
           <div className="flex flex-col space-y-2 text-center">
             <h2 className="flex items-center justify-center gap-3 font-secondary text-lg md:text-2xl font-semibold text-primary">
-              <SvgIcon icon={viewGift.icon} className="text-secondary" />
+              <Icon icon={viewGift.icon} className="text-secondary" />
               {viewGift.name}
             </h2>
 

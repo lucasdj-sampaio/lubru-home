@@ -1,15 +1,14 @@
-import { Iconhub } from '@/shared/interfaces/icon';
 import { GiftCategoryDTO } from '../dtos/giftCategory';
 import { GiftItem } from './giftItem';
 
 export class GiftCategory {
-  icon: Iconhub;
+  icon: string;
   category: string;
   gifts: GiftItem[];
   isOpen?: boolean;
 
   constructor(
-    icon: Iconhub,
+    icon: string,
     category: string,
     gifts: GiftItem[],
     isOpen = false,
@@ -21,13 +20,9 @@ export class GiftCategory {
   }
 
   static fromJson(json: any): GiftCategory {
-    const icon = {
-      width: json.Icon.width,
-      height: json.Icon.height,
-      iconData: json.Icon.iconData,
-    };
-    const category = json.Category;
-    const gifts = (json.Gift || []).map((g: any) => GiftItem.fromJson(g));
+    const icon = json.icon;
+    const category = json.category;
+    const gifts = (json.gifts || []).map((g: any) => GiftItem.fromJson(g));
 
     return new GiftCategory(icon, category, gifts);
   }

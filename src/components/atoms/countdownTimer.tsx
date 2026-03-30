@@ -1,5 +1,6 @@
 'use client';
 import { addPlural, getRemainingTime } from '@/util';
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
 export function CountdownTimer({ limit }: { limit: string }) {
@@ -18,12 +19,14 @@ export function CountdownTimer({ limit }: { limit: string }) {
     return () => clearInterval(interval);
   }, [limit]);
 
+  const pCountdown = 'font-secondary font-semibold text-title';
+
   if (!state) {
-    return <p className="text-2xl font-bold text-primary">Carregando…</p>;
+    return <p className={clsx(pCountdown, 'text-2xl')}>Carregando…</p>;
   }
 
   if (state.expired) {
-    return <p className="text-4xl font-bold text-primary">Chegou! ✨🎉</p>;
+    return <p className={clsx(pCountdown, 'text-4xl')}>Chegou! ✨🏠</p>;
   }
 
   const { d, h, m, s } = state;

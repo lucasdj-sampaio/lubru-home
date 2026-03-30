@@ -16,12 +16,10 @@ export default async function Home() {
   const json = await fetchStrapi('event', { revalidate: 7200 });
   const event = EventContent.fromJson(json);
 
-  const jsonGifts = await fetchStrapi(
-    'gifts?populate[Gift][populate]=*&populate[Gift][filters][Active][$eq]=true&sort=id:asc',
-    {
-      noStore: true,
-    },
-  );
+  const jsonGifts = await fetchStrapi('wishlist', {
+    noStore: true,
+  });
+
   const wishlist = Wishlist.fromJson(jsonGifts);
 
   const sectionClass = 'p-10 flex flex-col gap-8 items-center';

@@ -1,4 +1,5 @@
 import { Button } from '@/components/atoms/button';
+import clsx from 'clsx';
 import { Heart, Home } from 'lucide-react';
 
 interface Props {
@@ -18,25 +19,19 @@ async function deactivateGift(id: string): Promise<string> {
     },
   );
 
-  if (!res.ok) {
-    const text = await res.text();
-    console.error('Erro da API:', text);
-    throw new Error(`Erro ${res.status}: ${text}`);
-  }
+  if (!res.ok) throw new Error(`Erro ${res.status}: ${await res.text()}`);
 
-  const data = await res.json();
-  return data.name;
+  return (await res.json()).name;
 }
 
-export default async function ThanksPage({ params }: Props) {
-  const { id } = await params;
-
+export default async function ThanksPage({ params: { id } }: Props) {
   const giftName = await deactivateGift(id);
+  const pClass = 'text-regular text-sm md:text-md';
 
   return (
-    <main className="min-h-screen flex items-center text-center justify-center bg-item-background">
+    <main className="min-h-screen flex items-center justify-center text-center bg-item-background">
       <div className="flex flex-col items-center gap-3 max-w-lg">
-        <div className="rounded-full bg-secondary/10 w-max p-5 mb-6 text-secondary">
+        <div className="rounded-full bg-secondary/10 w-max p-3 md:p-5 mb-6 text-secondary">
           <Heart size={42} />
         </div>
 
@@ -44,19 +39,22 @@ export default async function ThanksPage({ params }: Props) {
           OBRIGADO!
         </span>
 
-        <h1 className="text-4xl font-medium font-secondary text-primary">
+        <h1 className="text-2xl md:text-4xl font-medium font-secondary text-primary">
           Presente recebido!
         </h1>
 
-        <div className="flex flex-col gap-4 items-center font-semibold">
-          <hr className="section-hr m-5" />
+        <div className="flex flex-col gap-4 items-center font-semibold w-full max-w-[80vw]">
+          <hr className="section-hr m-3 md:m-5" />
 
-          <p className="text-regular">
-            Agradecemos de coração pela sua contribuição com
-            <strong className="text-secondary">{` ${giftName}`}</strong>.
+          <p className={pClass}>
+            Agradecemos de coração pela sua contribuição
+            {giftName && (
+              <strong className="text-secondary">{`com ${giftName}`}</strong>
+            )}
+            .
           </p>
 
-          <p className="text-regular m-2">
+          <p className={clsx(pClass, 'm-2')}>
             Sua generosidade nos ajuda a construir o nosso novo lar. Mal podemos
             esperar para celebrar esse momento com você! ✈️
           </p>

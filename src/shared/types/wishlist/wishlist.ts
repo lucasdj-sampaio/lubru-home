@@ -15,7 +15,9 @@ export class Wishlist {
   }
 
   static fromJson(json: any): Wishlist {
-    const gifts = (json.data || []).map((g: any) => GiftCategory.fromJson(g));
+    const gifts = (json.categories || []).map((g: any) =>
+      GiftCategory.fromJson(g),
+    );
 
     return new Wishlist(gifts);
   }

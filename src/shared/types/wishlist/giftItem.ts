@@ -1,9 +1,8 @@
-import { Iconhub } from '@/shared/interfaces/icon';
 import { GiftItemDTO } from '../dtos/giftItem';
 
 export class GiftItem {
   id: number;
-  icon: Iconhub;
+  icon: string;
   name: string;
   description: string;
   active: boolean;
@@ -12,7 +11,7 @@ export class GiftItem {
 
   constructor(
     id: number,
-    icon: Iconhub,
+    icon: string,
     name: string,
     description: string,
     active: boolean,
@@ -31,16 +30,12 @@ export class GiftItem {
   static fromJson(json: any): GiftItem {
     return new GiftItem(
       json.id,
-      {
-        width: json.Icon.width,
-        height: json.Icon.height,
-        iconData: json.Icon.iconData,
-      },
-      json.Name,
-      json.Description,
-      json.Active,
-      json.BuyUrl,
-      json.Value,
+      json.icon,
+      json.name,
+      json.description,
+      json.active,
+      json.buyUrl,
+      json.value,
     );
   }
 

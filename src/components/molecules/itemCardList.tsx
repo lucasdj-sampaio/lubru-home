@@ -1,7 +1,7 @@
 'use client';
 import { JokesDTO } from '@/shared/types/dtos/jokes';
+import { Icon } from '@iconify/react';
 import { ItemCard } from '../atoms/itemCard';
-import { SvgIcon } from '../atoms/svgIcon';
 
 interface ItemCardListProps {
   items: JokesDTO;
@@ -13,7 +13,7 @@ export function ItemCardList({ items }: ItemCardListProps) {
       {items.activites.map((item: any, i: number) => (
         <ItemCard
           key={`itemCard_${item.name}_${i}`}
-          icon={<SvgIcon icon={item.icon} size={20} />}
+          icon={<Icon icon={item.icon} width={24} height={24} />}
           label={item.name}
         />
       ))}

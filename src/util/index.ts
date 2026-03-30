@@ -13,8 +13,15 @@ export function getRemainingTime(
   text: string;
   expired: boolean;
 } {
-  const target = new Date(dateStr).getTime();
-  const now = Date.now();
+  const target = new Date(
+    new Date(dateStr).toLocaleString('en-US', {
+      timeZone: 'America/Sao_Paulo',
+    }),
+  ).getTime();
+
+  const now = new Date(
+    new Date().toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }),
+  ).getTime();
 
   const diff = target - now;
 

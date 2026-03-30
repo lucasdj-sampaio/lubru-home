@@ -1,7 +1,7 @@
 import { GiftItemDTO } from '@/shared/types/dtos/giftItem';
 import { formatBRL, truncateText } from '@/util';
+import { Icon } from '@iconify/react';
 import clsx from 'clsx';
-import { SvgIcon } from './svgIcon';
 
 interface GiftCardProps {
   gift: GiftItemDTO;
@@ -28,7 +28,7 @@ export default function GiftCard({ gift, onClick }: GiftCardProps) {
           'group-hover:bg-secondary/20',
         )}
       >
-        <SvgIcon icon={icon} className="text-secondary" />
+        <Icon icon={icon} className="text-secondary" width={24} height={24} />
       </div>
 
       <h3 className="mb-2 font-secondary text-lg text-primary">{name}</h3>

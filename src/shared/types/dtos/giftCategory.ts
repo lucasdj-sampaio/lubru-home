@@ -1,9 +1,8 @@
-import { Iconhub } from '@/shared/interfaces/icon';
 import { GiftItemDTO } from './giftItem';
 
 export type GiftCategoryDTO = {
   category: string;
-  icon: Iconhub;
+  icon: string;
   gifts: GiftItemDTO[];
   isOpen?: boolean;
 };

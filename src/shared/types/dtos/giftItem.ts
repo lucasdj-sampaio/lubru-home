@@ -1,8 +1,6 @@
-import { Iconhub } from '@/shared/interfaces/icon';
-
 export type GiftItemDTO = {
   id: number;
-  icon: Iconhub;
+  icon: string;
   name: string;
   description: string;
   active: boolean;
