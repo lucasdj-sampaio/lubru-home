@@ -27,7 +27,8 @@ export default async function AboutEvent({ event }: { event: EventContent }) {
   const divider = 'border-t border-dashed border-regular/30 pt-6 mt-8';
   const divIncludClass =
     'flex flex-col gap-2 [&>div]:flex [&>div]:items-center [&>div]:gap-2';
-  const spanTitleClass = 'font-secondary text-primary font-medium';
+  const spanTitleClass =
+    'font-secondary text-primary font-medium text-sm md:text-md';
 
   const cards = [
     {
@@ -61,11 +62,21 @@ export default async function AboutEvent({ event }: { event: EventContent }) {
         as pessoas que amamos!
       </p>
 
-      <div className="max-w-3xl mx-auto rounded-lg border border-regular/30 bg-item-background/80 overflow-hidden">
-        <div className="flex items-center justify-between bg-primary px-6 py-3">
+      <div
+        className={clsx(
+          'max-w-3xl mx-auto rounded-lg border border-regular/30',
+          'bg-item-background/80 overflow-hidden',
+        )}
+      >
+        <div
+          className={clsx(
+            'flex items-center justify-between',
+            'bg-primary px-4 md:px-6 py-3 [&_p]:text-xs',
+          )}
+        >
           <div className="flex items-center gap-2">
             <Plane size={16} className="text-secondary" />
-            <p className="text-xs tracking-widest text-title font-secondary">
+            <p className="tracking-widest text-title font-secondary">
               BOARDING PASS
             </p>
           </div>
@@ -73,10 +84,24 @@ export default async function AboutEvent({ event }: { event: EventContent }) {
         </div>
 
         <div className="p-8 space-y-8">
-          <div className="grid gap-8 md:grid-cols-3">
-            {cards.map((card, i) => (
-              <EventCard key={i} {...card} />
-            ))}
+          <div className="grid gap-8 grid-cols-2 md:grid-cols-3">
+            {cards.map((item, index) => {
+              const isLast = index === cards.length - 1;
+              const isOdd = cards.length % 2 !== 0;
+
+              return (
+                <div
+                  key={index}
+                  className={clsx(
+                    isLast &&
+                      isOdd &&
+                      'col-span-2 flex justify-center md:col-span-1 md:flex-none md:justify-start',
+                  )}
+                >
+                  <EventCard key={index} {...item} />
+                </div>
+              );
+            })}
           </div>
 
           <div className={`${divider} grid md:grid-cols-2 gap-6 text-sm`}>

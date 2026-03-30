@@ -3,8 +3,9 @@ import Link from 'next/link';
 import React from 'react';
 
 interface ButtonProps {
+  variant?: 'primary' | 'secondary';
   type?: 'button' | 'submit' | 'reset';
-  href?: string;
+  href?: { url: string; externalLink?: boolean };
   children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
@@ -12,6 +13,7 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({
+  variant = 'primary',
   type = 'button',
   href,
   children,
@@ -21,15 +23,20 @@ export const Button: React.FC<ButtonProps> = ({
 }: ButtonProps) => {
   const styles = clsx(
     'flex items-center justify-center gap-2 no-select px-8 py-2',
-    'border-2 text-secondary font-light',
+    'border-2 font-light',
     'hover:bg-secondary hover:text-primary hover:[&>svg]:text-primary hover:border-secondary',
     'transition-all duration-300 [&>svg]:transition-all [&>svg]:duration-300',
+    variant == 'primary' ? 'text-secondary' : 'text-primary',
     className,
   );
 
   if (href) {
     return (
-      <Link href={href} className={styles}>
+      <Link
+        href={href.url}
+        className={styles}
+        target={href.externalLink ? '_blank' : ''}
+      >
         {children}
       </Link>
     );

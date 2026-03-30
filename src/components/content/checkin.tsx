@@ -74,7 +74,7 @@ export default function Checkin() {
         <hr className="section-hr" />
       </div>
 
-      <p className="max-w-lg mx-auto leading-relaxed text-opaque">
+      <p className="max-w-lg mx-auto text-center text-opaque leading-relaxed">
         Garanta seu lugar nesta viagem especial. Faça seu check-in abaixo.
       </p>
 

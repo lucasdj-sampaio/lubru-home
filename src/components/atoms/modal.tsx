@@ -33,7 +33,7 @@ export function Modal({ open, onClose, children }: ModalProps) {
 
       <div
         className={clsx(
-          'bg-background relative z-50 w-full max-w-lg rounded-xl p-6 shadow-xl',
+          'bg-background relative z-50 w-[90vw] max-w-lg rounded-xl p-6 shadow-xl',
           'animate-scale-in',
         )}
       >
@@ -41,7 +41,7 @@ export function Modal({ open, onClose, children }: ModalProps) {
 
         <button
           onClick={onClose}
-          className="absolute top-4 right-6 text-sm opacity-70 hover:opacity-100"
+          className="absolute top-3 right-3 md:top-4 md:right-6 text-sm opacity-70 hover:opacity-100"
         >
           ✕
         </button>

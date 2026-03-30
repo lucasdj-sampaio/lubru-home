@@ -86,7 +86,7 @@ button {
 @layer components {
   .section-title {
     @apply flex flex-col gap-4 items-center justify-center font-normal;
-    @apply [&>h1]:font-secondary [&>h1]:text-3xl [&>h1]:md:text-5xl [&>h1]:mb-6;
+    @apply [&>h1]:font-secondary [&>h1]:text-3xl [&>h1]:text-center [&>h1]:md:text-5xl [&>h1]:mb-6;
     @apply [&>h2]:text-sm [&>h2]:text-secondary [&>h2]:tracking-[0.3em] [&>h2]:uppercase;
   }
 

@@ -24,7 +24,7 @@ export const EventCard: React.FC<EventProps> = ({
         {icon}
       </div>
 
-      <h3 className="font-secondary text-lg text-primary font-medium">
+      <h3 className="font-secondary text-md md:text-lg text-primary font-medium">
         {label}
       </h3>
       <p className="text-regular">{data}</p>

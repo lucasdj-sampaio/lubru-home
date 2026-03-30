@@ -3,6 +3,7 @@ import { GiftItemDTO } from '@/shared/types/dtos/giftItem';
 import { WishlistDTO } from '@/shared/types/dtos/wishlist';
 import { formatBRL } from '@/util';
 import { useState } from 'react';
+import { Button } from '../atoms/button';
 import GiftCard from '../atoms/giftCard';
 import { ItemCard } from '../atoms/itemCard';
 import { Modal } from '../atoms/modal';
@@ -57,7 +58,7 @@ export function WishlistContainer({ items }: WishlistProps) {
       {viewGift && (
         <Modal open={!!viewGift} onClose={handleCloseModal}>
           <div className="flex flex-col space-y-2 text-center">
-            <h2 className="flex items-center justify-center gap-3 font-secondary text-2xl font-semibold text-primary">
+            <h2 className="flex items-center justify-center gap-3 font-secondary text-lg md:text-2xl font-semibold text-primary">
               <SvgIcon icon={viewGift.icon} className="text-secondary" />
               {viewGift.name}
             </h2>
@@ -65,10 +66,13 @@ export function WishlistContainer({ items }: WishlistProps) {
             <p className="text-sm text-text-regular">{viewGift.description}</p>
           </div>
 
-          <div className="flex flex-col items-center gap-6 py-4">
-            <div className="flex h-48 w-48 flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-secondary/30 bg-secondary/5">
-              <span className="text-xs text-text-regular">QR Code PIX</span>
-            </div>
+          <div className="flex flex-col items-center gap-6 pt-4">
+            <Button
+              variant="secondary"
+              href={{ url: viewGift.buyUrl, externalLink: true }}
+            >
+              Presentear com {viewGift.name}
+            </Button>
 
             <span className="inline-block rounded-full border border-secondary/20 bg-secondary/10 px-4 py-1.5 text-sm font-semibold tracking-wide text-secondary">
               {formatBRL(viewGift.value)}
@@ -76,7 +80,7 @@ export function WishlistContainer({ items }: WishlistProps) {
 
             <div className="space-y-2 text-center">
               <p className="text-sm text-text-regular">
-                Escaneie o QR Code acima para realizar o pagamento via PIX
+                Clique no botão para realizar o pagamento
               </p>
 
               <p className="text-xs text-secondary">

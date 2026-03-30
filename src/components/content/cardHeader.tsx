@@ -9,8 +9,8 @@ import { HrIcon } from '../atoms/hrIcon';
 export default function CardHeader() {
   const hr = <hr className="section-hr" />;
   const baseTitleClass =
-    'font-secondary font-normal text-4xl md:text-6xl font-bold';
-  const baseOpaqueTextClass = 'text-sm font-light text-opaque';
+    'font-secondary font-normal text-5xl md:text-6xl font-bold';
+  const baseOpaqueTextClass = 'font-light text-opaque';
 
   const plane = (rotate?: boolean): React.ReactNode => (
     <Plane size={16} className={clsx(rotate && 'rotate-45')} />
@@ -29,17 +29,17 @@ export default function CardHeader() {
           'bg-cover bg-center bg-no-repeat',
         )}
       >
-        <div className="flex flex-col items-center gap-10 pt-12">
+        <div className="flex flex-col text-center items-center gap-10 pt-12">
           {hr}
 
           <HrIcon icon={plane(true)} />
 
-          <div className="flex flex-col gap-6">
-            <p className={clsx(baseOpaqueTextClass, 'text-spacing')}>
+          <div className="flex flex-col items-center gap-6">
+            <p className={clsx(baseOpaqueTextClass, 'text-sm text-spacing')}>
               EMBARQUE NESTA JORNADA CONOSCO!
             </p>
 
-            <div className="text-center">
+            <div>
               <h1 className={clsx(baseTitleClass, 'text-title')}>Chá de</h1>
               <h1 className={clsx(baseTitleClass, 'text-secondary')}>
                 Casa Nova
@@ -49,14 +49,14 @@ export default function CardHeader() {
             <p
               className={clsx(
                 baseOpaqueTextClass,
-                'text-lg! max-w-[30vw] text-center',
+                'text-lg md:w-[30vw] text-center',
               )}
             >
               Venha celebrar conosco este novo destino da nossa história
             </p>
           </div>
 
-          <Button href="#roadmap">{plane()} EMBARCAR</Button>
+          <Button href={{ url: '#roadmap' }}>{plane()} EMBARCAR</Button>
 
           {hr}
         </div>

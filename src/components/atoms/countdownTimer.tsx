@@ -35,23 +35,19 @@ export function CountdownTimer({ limit }: { limit: string }) {
   ];
 
   return (
-    <div className="flex gap-2 md:gap-4 items-center no-select">
+    <div className="flex gap-3 md:gap-8 items-center no-select">
       {metrics.map((item, i) => {
         return i === 0 && item.value === 0 ? null : (
           <React.Fragment key={i}>
             <div className="flex flex-col items-center gap-2">
-              <p className="timer-card font-secondary text-3xl md:text-5xl text-title">
+              <p className="timer-card font-secondary text-4xl md:text-5xl text-title">
                 {item.value.toString().padStart(2, '0')}
               </p>
 
-              <p className="text:xs md:text-sm font-light text-opaque uppercase">
+              <p className="text-xs md:text-sm font-light text-opaque uppercase">
                 {item.label}
               </p>
             </div>
-
-            {i < metrics.length - 1 && (
-              <span className="text-3xl font-normal text-primary">:</span>
-            )}
           </React.Fragment>
         );
       })}
