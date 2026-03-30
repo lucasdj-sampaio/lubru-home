@@ -1,51 +1,70 @@
-import { fetchStrapi } from '@/app/api/strapi';
-import { GiftResponseDTO } from '@/shared/types/dtos/giftResponse';
-import { Home } from 'lucide-react';
+import { Button } from '@/components/atoms/button';
+import { Heart, Home } from 'lucide-react';
 
 interface Props {
-  params: { id: number };
+  params: { id: string };
 }
 
-export default async function ThanksPage({ params }: Props) {
-  const { id } = params;
-
-  const response = await fetchStrapi<GiftResponseDTO>(
-    `gifts/${id}/deactivate`,
+async function deactivateGift(id: string): Promise<string> {
+  const res = await fetch(
+    `${process.env.STRAPI_BASEURL}/api/gifts/${id}/deactivate`,
     {
       method: 'POST',
-      noStore: true,
       headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN ?? ''}`,
+        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
     },
   );
 
-  return (
-    <main className="min-h-screen flex items-center justify-center bg-primary">
-      <div className="text-center max-w-xl space-y-6">
-        <h2 className="text-sm tracking-widest text-secondary">OBRIGADO!</h2>
+  if (!res.ok) {
+    const text = await res.text();
+    console.error('Erro da API:', text);
+    throw new Error(`Erro ${res.status}: ${text}`);
+  }
 
-        <h1 className="text-4xl font-secondary text-primary">
+  const data = await res.json();
+  return data.name;
+}
+
+export default async function ThanksPage({ params }: Props) {
+  const { id } = await params;
+
+  const giftName = await deactivateGift(id);
+
+  return (
+    <main className="min-h-screen flex items-center text-center justify-center bg-item-background">
+      <div className="flex flex-col items-center gap-3 max-w-lg">
+        <div className="rounded-full bg-secondary/10 w-max p-5 mb-6 text-secondary">
+          <Heart size={42} />
+        </div>
+
+        <span className="text-md font-medium tracking-widest text-secondary">
+          OBRIGADO!
+        </span>
+
+        <h1 className="text-4xl font-medium font-secondary text-primary">
           Presente recebido!
         </h1>
 
-        <p className="text-regular">
-          Agradecemos de coração pela sua contribuição com{' '}
-          <span>{response.name}</span>
-        </p>
+        <div className="flex flex-col gap-4 items-center font-semibold">
+          <hr className="section-hr m-5" />
 
-        <p className="text-regular">
-          Sua generosidade nos ajuda a construir o nosso novo lar. Mal podemos
-          esperar para celebrar esse momento com você! ✈️
-        </p>
+          <p className="text-regular">
+            Agradecemos de coração pela sua contribuição com
+            <strong className="text-secondary">{` ${giftName}`}</strong>.
+          </p>
 
-        <a
-          href="/"
-          className="inline-block border border-secondary px-6 py-2 rounded-md text-secondary hover:bg-secondary/10 transition"
-        >
-          <Home /> Voltar ao início
-        </a>
+          <p className="text-regular m-2">
+            Sua generosidade nos ajuda a construir o nosso novo lar. Mal podemos
+            esperar para celebrar esse momento com você! ✈️
+          </p>
+
+          <Button href={{ url: '/' }} variant="secondary" className="w-max">
+            <Home /> Voltar ao início
+          </Button>
+        </div>
       </div>
     </main>
   );
