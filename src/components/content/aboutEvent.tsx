@@ -19,7 +19,9 @@ import { HrIcon } from '../atoms/hrIcon';
 import { ItemCardList } from '../molecules/itemCardList';
 
 export default async function AboutEvent({ event }: { event: EventContent }) {
-  const json = await fetchStrapi('joke?populate[Activitie][populate]=*');
+  const json = await fetchStrapi('joke?populate[Activitie][populate]=*', {
+    revalidate: 7200,
+  });
   const jokes = Jokes.fromJson(json);
 
   const { date, time } = splitDateTime(event.date);

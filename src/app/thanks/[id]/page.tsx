@@ -61,7 +61,7 @@ export default async function ThanksPage({ params }: Props) {
             esperar para celebrar esse momento com você! ✈️
           </p>
 
-          <Button href={{ url: '/' }} variant="secondary" className="w-max">
+          <Button href="/" variant="secondary" className="w-max">
             <Home /> Voltar ao início
           </Button>
         </div>

@@ -5,7 +5,7 @@ import React from 'react';
 interface ButtonProps {
   variant?: 'primary' | 'secondary';
   type?: 'button' | 'submit' | 'reset';
-  href?: { url: string; externalLink?: boolean };
+  href?: string;
   children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
@@ -32,11 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <Link
-        href={href.url}
-        className={styles}
-        target={href.externalLink ? '_blank' : ''}
-      >
+      <Link href={href} className={styles}>
         {children}
       </Link>
     );

@@ -67,10 +67,7 @@ export function WishlistContainer({ items }: WishlistProps) {
           </div>
 
           <div className="flex flex-col items-center gap-6 pt-4">
-            <Button
-              variant="secondary"
-              href={{ url: viewGift.buyUrl, externalLink: true }}
-            >
+            <Button variant="secondary" href={viewGift.buyUrl}>
               Presentear com {viewGift.name}
             </Button>
 

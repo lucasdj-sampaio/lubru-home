@@ -56,7 +56,7 @@ export default function CardHeader() {
             </p>
           </div>
 
-          <Button href={{ url: '#roadmap' }}>{plane()} EMBARCAR</Button>
+          <Button href="#roadmap">{plane()} EMBARCAR</Button>
 
           {hr}
         </div>

@@ -13,13 +13,13 @@ import { Clock } from 'lucide-react';
 import React from 'react';
 
 export default async function Home() {
-  const json = await fetchStrapi('event');
+  const json = await fetchStrapi('event', { revalidate: 7200 });
   const event = EventContent.fromJson(json);
 
   const jsonGifts = await fetchStrapi(
-    'gifts?populate[Gift][populate]=*&sort=id:asc',
+    'gifts?populate[Gift][populate]=*&populate[Gift][filters][Active][$eq]=true&sort=id:asc',
     {
-      revalidate: 7200,
+      noStore: true,
     },
   );
   const wishlist = Wishlist.fromJson(jsonGifts);
