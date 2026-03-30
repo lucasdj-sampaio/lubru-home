@@ -1,0 +1,154 @@
+@import 'tailwindcss';
+
+html,
+body {
+  @apply w-full h-full m-0 p-0 overflow-y-auto overflow-x-hidden;
+  scroll-behavior: smooth;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+a {
+  @apply no-underline outline-none;
+}
+
+img,
+table,
+button {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+@theme {
+  --font-secondary: var(--font-cinzel);
+
+  --color-background: rgb(220, 218, 213);
+  --color-sub-background: rgb(238, 235, 231);
+  --color-item-background: rgb(207, 197, 186);
+  --color-primary: rgb(47, 69, 111);
+  --color-secondary: rgb(197, 162, 73);
+  --color-title: rgb(255, 255, 255);
+  --color-regular: rgb(90, 102, 109);
+  --color-opaque: rgb(168, 178, 194);
+}
+
+@layer utilities {
+  .font-secondary {
+    font-family: var(--font-secondary);
+  }
+
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .text-spacing {
+    letter-spacing: 4.2px;
+  }
+
+  .divider-gradient {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--color-primary),
+      transparent 100%
+    );
+  }
+
+  .animate-reveal-blur {
+    animation: revealBlur 0.8s ease-out forwards;
+  }
+
+  .bg-css-noise {
+    background-color: #e8b57f;
+    position: relative;
+  }
+
+  .bg-css-noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    );
+    background-size: 2px 2px;
+    opacity: 0.2;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply flex flex-col gap-4 items-center justify-center font-normal;
+    @apply [&>h1]:font-secondary [&>h1]:text-3xl [&>h1]:text-center [&>h1]:md:text-5xl [&>h1]:mb-6;
+    @apply [&>h2]:text-sm [&>h2]:text-secondary [&>h2]:tracking-[0.3em] [&>h2]:uppercase;
+  }
+
+  .section-hr {
+    @apply h-[1px] w-32 border-none bg-secondary;
+  }
+
+  .timer-card {
+    @apply w-16 h-15 md:w-28 md:h-26 aspect-square max-w-[120px] rounded-lg bg-background/10 border border-secondary/20 flex items-center justify-center backdrop-blur-sm;
+  }
+}
+
+@keyframes revealBlur {
+  0% {
+    filter: blur(20px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease;
+}
