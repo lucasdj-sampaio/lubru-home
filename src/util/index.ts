@@ -55,19 +55,26 @@ export function getRemainingTime(
 export function splitDateTime(timestamp: string) {
   const date = new Date(timestamp);
 
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
+  const formatterDate = new Intl.DateTimeFormat('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
 
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const formatterTime = new Intl.DateTimeFormat('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 
-  const dateStr = `${day}/${month}/${year}`;
-  const timeStr = `${hours}h ${minutes}m`;
+  const [day, month, year] = formatterDate.format(date).split('/');
+  const [hours, minutes] = formatterTime.format(date).split(':');
 
   return {
-    date: dateStr,
-    time: timeStr,
+    date: `${day}/${month}/${year}`,
+    time: `${hours}h ${minutes}m`,
   };
 }
 
