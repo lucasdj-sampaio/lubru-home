@@ -32,9 +32,12 @@ export default function Checkin() {
     setSending(true);
 
     try {
-      const res = await fetch('/api/strapi/checkin', {
+      const res = await fetch('/api/checkin', {
         method: 'POST',
         cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           name,
           companions: Number(companion),
